@@ -1,0 +1,120 @@
+<%- include("partials/header"); -%>
+
+<body id="inicio">
+    <!-- Header -->
+    <header class="bg-success text-white py-3">
+        <div class="container">
+            <div class="d-flex justify-content-between align-items-center">
+                <h1 class="h3 mb-0">EcoWeb</h1>
+                <form action="/home" method="get">
+                    <button type="submit" class="btn btn-light">Inicio</button>
+                </form>
+            </div>
+        </div>
+    </header>
+
+    <!-- Contenido Principal -->
+    <div class="container">
+        <h2 class="form-title">Calculadora de Huella de Carbono</h2>
+        <form action="/calculate" method="POST">
+            <!-- Transporte -->
+            <div class="mb-4">
+                <h3 class="category-title">Transporte</h3>
+                <div class="mb-3">
+                    <label for="transporte" class="form-label">Tipo de transporte</label>
+                    <select class="form-select" id="transporte" name="transporte">
+                        <option selected>Selecciona tu tipo de transporte</option>
+                        <option value="1">Automóvil</option>
+                        <option value="2">Transporte Público</option>
+                        <option value="3">Bicicleta</option>
+                        <option value="4">Caminar</option>
+                    </select>
+                </div>
+                <div class="mb-3">
+                    <label for="kilometraje" class="form-label">Kilometraje anual (km)</label>
+                    <input type="number" class="form-control" id="kilometraje" name="kilometraje" placeholder="Introduce los km anuales">
+                </div>
+                <div class="mb-3">
+                    <label for="eficiencia" class="form-label">Eficiencia del vehículo (km/L)</label>
+                    <input type="number" step="0.1" class="form-control" id="eficiencia" name="eficiencia" placeholder="Introduce la eficiencia del vehículo">
+                </div>
+                <div class="mb-3">
+                    <label for="vuelos" class="form-label">Número de vuelos anuales</label>
+                    <input type="number" class="form-control" id="vuelos" name="vuelos" placeholder="Introduce el número de vuelos">
+                </div>
+            </div>
+        
+            <!-- Vivienda -->
+            <div class="mb-4">
+                <h3 class="category-title">Vivienda</h3>
+                <div class="mb-3">
+                    <label for="energia" class="form-label">Consumo de electricidad (kWh/mes)</label>
+                    <input type="number" class="form-control" id="energia" name="energia" placeholder="Introduce tu consumo mensual de electricidad">
+                </div>
+                <div class="mb-3">
+                    <label for="gas" class="form-label">Consumo de gas natural (m³/mes)</label>
+                    <input type="number" class="form-control" id="gas" name="gas" placeholder="Introduce tu consumo mensual de gas natural">
+                </div>
+                <div class="mb-3">
+                    <label for="calefaccion" class="form-label">Tipo de calefacción</label>
+                    <select class="form-select" id="calefaccion" name="calefaccion">
+                        <option selected>Selecciona el tipo de calefacción</option>
+                        <option value="1">Electricidad</option>
+                        <option value="2">Gas Natural</option>
+                        <option value="3">Otros</option>
+                    </select>
+                </div>
+            </div>
+        
+            <!-- Alimentación -->
+            <div class="mb-4">
+                <h3 class="category-title">Alimentación</h3>
+                <div class="mb-3">
+                    <label for="dieta" class="form-label">Tipo de dieta</label>
+                    <select class="form-select" id="dieta" name="dieta">
+                        <option selected>Selecciona tu dieta</option>
+                        <option value="1">Carnívora</option>
+                        <option value="2">Vegetariana</option>
+                        <option value="3">Vegana</option>
+                    </select>
+                </div>
+                <div class="mb-3">
+                    <label for="frecuencia_carne" class="form-label">Frecuencia de consumo de carne (días/semana)</label>
+                    <input type="number" class="form-control" id="frecuencia_carne" name="frecuencia_carne" placeholder="Introduce los días por semana">
+                </div>
+            </div>
+        
+            <!-- Residuos y consumo -->
+            <div class="mb-4">
+                <h3 class="category-title">Consumo y Residuos</h3>
+                <div class="mb-3">
+                    <label for="basura" class="form-label">Cantidad de basura generada (kg/semana)</label>
+                    <input type="number" class="form-control" id="basura" name="basura" placeholder="Introduce los kg de basura generada por semana">
+                </div>
+                <div class="mb-3">
+                    <label for="reciclaje" class="form-label">Porcentaje de residuos reciclados (%)</label>
+                    <input type="number" class="form-control" id="reciclaje" name="reciclaje" placeholder="Introduce el porcentaje reciclado">
+                </div>
+            </div>
+        
+            <!-- Botón de enviar -->
+            <div class="d-grid">
+                <button type="submit" class="btn btn-custom">Calcular Huella de Carbono</button>
+            </div>
+        </form>
+        
+    </div>
+
+    <div class="container">
+        <h1>Resultados</h1>
+        <div class="pie-chart">
+            <div class="legend">
+              <div><span class="box" style="background-color: #006400;"></span> Transporte</div>
+              <div><span class="box" style="background-color: #228B22;"></span> Vivienda</div>
+              <div><span class="box" style="background-color: #32CD32;"></span> Alimentación</div>
+              <div><span class="box" style="background-color: #7CFC00;"></span> Consumo</div>
+            </div>
+        </div>
+    </div>
+
+<%- include("partials/footer"); -%>

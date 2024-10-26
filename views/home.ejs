@@ -1,0 +1,71 @@
+<%- include("partials/header"); -%>
+
+<!-- Header -->
+<header class="bg-success text-white py-3">
+    <img src="./img/logo.jpeg" alt="Logo" class="logo"/>
+    <div class="container">
+        <div class="d-flex justify-content-between align-items-center">
+            <h1 class="h3 mb-0">EcoWeb</h1>
+            <form action="/calculator" method="get">
+                <button type="submit" class="btn btn-light">Formulario</button>
+            </form>
+        </div>
+    </div>
+</header>
+  
+
+<!-- Sección Principal -->
+<div class="container-fluid text-center py-5" id="inicio">
+    <h1 class="main-title">Bienvenido a Nuestra Página</h1>
+    <p class="intro-text">Aquí podrás calcular tu huella de carbono personal y aprender más sobre cómo reducir tu impacto ambiental.</p>
+    <a href="calculator.html" class="btn btn-primary btn-lg">Ir al Formulario</a>
+</div>
+
+<!-- Sección de Información -->
+<div class="container-fluid py-5" id="informacion">
+    <h1 class="form-title">Información sobre la Huella de Carbono</h1>
+    <p>Aquí puedes agregar contenido informativo sobre la huella de carbono, consejos para reducirla, y más.</p>
+    
+    <!-- Sección 1: Explicación básica -->
+    <section class="my-4">
+        <h2 class="category-title">¿Qué es la Huella de Carbono?</h2>
+        <p>La huella de carbono es una medida del impacto que tienen nuestras actividades sobre el medio ambiente, en términos de la cantidad de gases de efecto invernadero que producimos.</p>
+    </section>
+    
+    <!-- Sección 2: Consejos para reducirla -->
+    <section class="my-4">
+        <h2 class="category-title">Cómo Reducir Tu Huella de Carbono</h2>
+        <p>En esta sección, puedes incluir consejos y prácticas recomendadas para disminuir la huella de carbono, como reducir el uso de plásticos, optar por transporte sostenible, etc.</p>
+    </section>
+</div>
+
+<div class="container-fluid py-5" id="conocenos">
+  <h1 class="contact-title text-center">Conócenos</h1>
+  <p class="text-center">Conoce a nuestro equipo, las personas detrás del proyecto que están comprometidas con la protección del medio ambiente y la reducción de la huella de carbono.</p>
+
+  <!-- Fila para miembros del equipo -->
+  <div class="container">
+      <div class="row">
+          <!-- Miembro 1 -->
+          <div class="col-md-4 text-center mb-4">
+              <img src="ruta/a/foto1.jpg" alt="Miembro 1" class="img-fluid rounded-circle mb-2" style="width: 150px; height: 150px; object-fit: cover;">
+              <h4>Alexis Vargas</h4>
+              <p>Posición y breve descripción sobre el miembro del equipo.</p>
+          </div>
+          <!-- Miembro 2 -->
+          <div class="col-md-4 text-center mb-4">
+              <img src="./img/omar.jpg" alt="Miembro 2" class="img-fluid rounded-circle mb-2" style="width: 150px; height: 150px; object-fit: cover;">
+              <h4>Omar Sánchez</h4>
+              <p>Estudiante de ISGC   </p>
+          </div>
+          <!-- Miembro 3 -->
+          <div class="col-md-4 text-center mb-4">
+              <img src="ruta/a/foto3.jpg" alt="Miembro 3" class="img-fluid rounded-circle mb-2" style="width: 150px; height: 150px; object-fit: cover;">
+              <h4>Kenzo Matoo</h4>
+              <p>Posición y breve descripción sobre el miembro del equipo.</p>
+          </div>
+      </div>
+  </div>
+</div>
+    
+<%- include("partials/footer"); -%>
