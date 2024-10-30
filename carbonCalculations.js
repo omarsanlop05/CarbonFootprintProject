@@ -1,103 +1,98 @@
-/**
- * Carbon footprint calculation functions
- */
-
-// Transporte (Coche y vuelos)
+// Transportation (Car and flights)
 function calcularEmisionesTransporte(tipoTransporte, kilometrajeAnual, eficienciaVehiculo, numeroVuelosAnuales) {
-  const factorEmisionGasolina = 2.31; // kg CO₂ por litro
-  const factorEmisionTransportePublico = 0.04; // kg CO₂ por km para transporte público
-  let emisionesTransporte = 0;
+  const factorEmisionGasolina = 2.31; // kg CO₂ emitted per liter of gasoline
+  const factorEmisionTransportePublico = 0.04; // kg CO₂ emitted per km for public transport
+  let emisionesTransporte = 0; // Variable to store transportation emissions
 
   switch (tipoTransporte) {
-    case 1: // Coche
-      const consumoAnualLitros = kilometrajeAnual / eficienciaVehiculo || 0;
-      emisionesTransporte = consumoAnualLitros * factorEmisionGasolina / 1000; // toneladas
+    case 1: // Car
+      const consumoAnualLitros = kilometrajeAnual / eficienciaVehiculo || 0; // Annual fuel consumption in liters
+      emisionesTransporte = consumoAnualLitros * factorEmisionGasolina / 1000; // Convert emissions to tons
       break;
-    case 2: // Transporte público
-      emisionesTransporte = kilometrajeAnual * factorEmisionTransportePublico / 1000; // toneladas
+    case 2: // Public transport
+      emisionesTransporte = kilometrajeAnual * factorEmisionTransportePublico / 1000; // Convert emissions to tons
       break;
-    case 3: // Bicicleta
-    case 4: // Caminar
-      emisionesTransporte = 0; // Emisiones cero para bicicleta y caminar
+    case 3: // Bicycle
+    case 4: // Walking
+      emisionesTransporte = 0; // Zero emissions for bicycle and walking
       break;
     default:
-      console.warn("Tipo de transporte no válido");
+      console.warn("Invalid transport type"); // Warn if the transport type is invalid
   }
 
-  // Emisiones por vuelos
-  const emisionesVuelos = numeroVuelosAnuales * 0.12; // cada vuelo emite 0.12 toneladas de CO₂
+  // Emissions from flights
+  const emisionesVuelos = numeroVuelosAnuales * 0.12; // Each flight emits 0.12 tons of CO₂
   
-  return emisionesTransporte + emisionesVuelos;
+  return emisionesTransporte + emisionesVuelos; // Return total transportation emissions
 }
 
-
-// Vivienda (Electricidad, gas natural y calefacción)
+// Housing (Electricity, natural gas, and heating)
 function calcularEmisionesVivienda(consumoElectricidad, consumoGasNatural, tipoCalefaccion) {
-  const factorEmisionElectricidad = 0.408; // kg CO₂ por kWh
-  const factorEmisionGas = 1.45; // kg CO₂ por m³
-  const promedioEmisionCalefaccionElectricidad = 0.3; // toneladas de CO₂ para calefacción eléctrica en México
-  const promedioEmisionCalefaccionGas = 0.8; // toneladas de CO₂ para calefacción a gas natural en México
-  const promedioEmisionCalefaccionOtros = 0.5; // toneladas de CO₂ para calefacción de otros tipos en México
+  const factorEmisionElectricidad = 0.408; // kg CO₂ emitted per kWh of electricity
+  const factorEmisionGas = 1.45; // kg CO₂ emitted per m³ of natural gas
+  const promedioEmisionCalefaccionElectricidad = 0.3; // Average CO₂ emissions for electric heating in Mexico (tons)
+  const promedioEmisionCalefaccionGas = 0.8; // Average CO₂ emissions for natural gas heating in Mexico (tons)
+  const promedioEmisionCalefaccionOtros = 0.5; // Average CO₂ emissions for other types of heating in Mexico (tons)
 
-  const consumoAnualElectricidad = consumoElectricidad * 12;
-  const emisionesElectricidad = consumoAnualElectricidad * factorEmisionElectricidad / 1000; // toneladas
+  const consumoAnualElectricidad = consumoElectricidad * 12; // Annual electricity consumption in kWh
+  const emisionesElectricidad = consumoAnualElectricidad * factorEmisionElectricidad / 1000; // Convert emissions to tons
 
-  const consumoAnualGas = consumoGasNatural * 12;
-  const emisionesGas = consumoAnualGas * factorEmisionGas / 1000; // toneladas
+  const consumoAnualGas = consumoGasNatural * 12; // Annual gas consumption in m³
+  const emisionesGas = consumoAnualGas * factorEmisionGas / 1000; // Convert emissions to tons
 
-  let emisionesCalefaccion = 0;
+  let emisionesCalefaccion = 0; // Variable to store heating emissions
   switch (tipoCalefaccion) {
     case 1: 
-      emisionesCalefaccion = promedioEmisionCalefaccionElectricidad;
+      emisionesCalefaccion = promedioEmisionCalefaccionElectricidad; // Use average emissions for electric heating
       break;
     case 2: 
-      emisionesCalefaccion = promedioEmisionCalefaccionGas;
+      emisionesCalefaccion = promedioEmisionCalefaccionGas; // Use average emissions for natural gas heating
       break;
     case 3: 
-      emisionesCalefaccion = promedioEmisionCalefaccionOtros;
+      emisionesCalefaccion = promedioEmisionCalefaccionOtros; // Use average emissions for other types of heating
       break;
     default:
-      console.warn("Tipo de calefacción no válido");
+      console.warn("Invalid heating type"); // Warn if the heating type is invalid
   }
 
-  return emisionesElectricidad + emisionesGas + emisionesCalefaccion;
+  return emisionesElectricidad + emisionesGas + emisionesCalefaccion; // Return total housing emissions
 }
 
-
-// Alimentación
+// Food consumption
 function calcularEmisionesAlimentacion(tipoDieta, frecuenciaConsumoCarne) {
-  let factorEmisionDieta;
+  let factorEmisionDieta; // Variable to store diet emissions factor
 
   switch (tipoDieta) {
     case 1:
-      factorEmisionDieta = 2.5; // toneladas CO₂ para dieta carnívora
+      factorEmisionDieta = 2.5; // CO₂ emissions for carnivorous diet (tons)
       break;
     case 2: 
-      factorEmisionDieta = 1.6; // toneladas CO₂ para dieta vegetariana
+      factorEmisionDieta = 1.6; // CO₂ emissions for vegetarian diet (tons)
       break;
     case 3: 
-      factorEmisionDieta = 0.9; // toneladas CO₂ para dieta vegana
+      factorEmisionDieta = 0.9; // CO₂ emissions for vegan diet (tons)
       break;
     default:
-      console.warn("Tipo de dieta no válido");
-      return 0;
+      console.warn("Invalid diet type"); // Warn if the diet type is invalid
+      return 0; // Return 0 emissions for invalid diet type
   }
 
-  const emisionesAdicionalesCarne = (frecuenciaConsumoCarne * 52 / 365) * 1.0; 
+  // Additional emissions based on meat consumption frequency (converted to annual)
+  const emisionesAdicionalesCarne = (frecuenciaConsumoCarne * 52 / 365) * 1.0; // Assume 1.0 tons CO₂ per instance of meat consumption
 
-  return factorEmisionDieta + emisionesAdicionalesCarne;
+  return factorEmisionDieta + emisionesAdicionalesCarne; // Return total food-related emissions
 }
 
-// Consumo y residuos
+// Waste and recycling
 function calcularEmisionesResiduos(cantidadBasuraGenerada, porcentajeResiduosReciclados) {
-  const factorEmisionResiduos = 1.5; // kg CO₂ por kg de basura
-  const residuosAnuales = cantidadBasuraGenerada * 52;
-  const emisionesResiduos = residuosAnuales * factorEmisionResiduos * (1 - porcentajeResiduosReciclados / 100) / 1000; // toneladas
+  const factorEmisionResiduos = 1.5; // kg CO₂ emitted per kg of waste
+  const residuosAnuales = cantidadBasuraGenerada * 52; // Total annual waste generated
+  const emisionesResiduos = residuosAnuales * factorEmisionResiduos * (1 - porcentajeResiduosReciclados / 100) / 1000; // Convert to tons, accounting for recycling percentage
   
-  return emisionesResiduos;
+  return emisionesResiduos; // Return total waste-related emissions
 }
 
-// Calcula y devuelve la huella de carbono total y las emisiones individuales en toneladas de CO₂
+// Calculates and returns the total carbon footprint and individual emissions in tons of CO₂
 function calcularHuellaCarbonoTotal(userData) {
   const emisionesTransporte = calcularEmisionesTransporte(
     userData.tipoTransporte,
@@ -122,8 +117,10 @@ function calcularHuellaCarbonoTotal(userData) {
     userData.porcentajeResiduosReciclados
   );
 
+  // Calculate total emissions by summing emissions from all categories
   const totalEmisiones = emisionesTransporte + emisionesVivienda + emisionesAlimentacion + emisionesResiduos;
 
+  // Return an object containing total emissions and emissions breakdown by category
   return {
     total: totalEmisiones,
     transporte: emisionesTransporte,
@@ -133,8 +130,7 @@ function calcularHuellaCarbonoTotal(userData) {
   };
 }
 
-
-// Exporta todas las funciones
+// Export all functions for use in other modules
 module.exports = {
   calcularEmisionesTransporte,
   calcularEmisionesVivienda,
