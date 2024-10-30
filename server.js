@@ -112,8 +112,13 @@ app.post('/calculate', (req, res) => {
   console.log(`Emisiones de alimentación: ${huellaCarbono.alimentacion.toFixed(2)} toneladas de CO₂ (${porcentajeAlimentacion.toFixed(2)}%)`);
   console.log(`Emisiones de residuos: ${huellaCarbono.residuos.toFixed(2)} toneladas de CO₂ (${porcentajeResiduos.toFixed(2)}%)`);
 
-  // Redirect back to the calculator page
-  res.redirect('/calculator');
+  // Redirect back to the calculator page with the calculated percentages
+  res.render('calculator', { 
+    porcentajeTransporte, 
+    porcentajeVivienda, 
+    porcentajeAlimentacion, 
+    porcentajeResiduos 
+  });
 });
 
 /**

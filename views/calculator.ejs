@@ -13,6 +13,55 @@
         </div>
     </header>
 
+    <% if(locals.porcentajeTransporte) { %>
+        <div class="container">
+            <h1>Resultados</h1>
+            <div class="pie-chart">
+              <canvas id="carbonFootprintChart" width="50%" height="50%"></canvas>
+              <div class="legend">
+                <div><span class="box" style="background-color: #006400;"></span> Transporte</div>
+                <div><span class="box" style="background-color: #228B22;"></span> Vivienda</div>
+                <div><span class="box" style="background-color: #32CD32;"></span> Alimentación</div>
+                <div><span class="box" style="background-color: #7CFC00;"></span> Consumo</div>
+              </div>
+            </div>
+          </div>
+        
+        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+          <script>
+            document.addEventListener('DOMContentLoaded', function() {
+              const ctx = document.getElementById('carbonFootprintChart').getContext('2d');
+              const chartData = {
+                labels: ['Transporte', 'Vivienda', 'Alimentación', 'Residuos'],
+                datasets: [{
+                  data: [
+                  <%= porcentajeTransporte.toFixed(2) %>,
+                  <%= porcentajeVivienda.toFixed(2) %>,
+                  <%= porcentajeAlimentacion.toFixed(2) %>,
+                  <%= porcentajeResiduos.toFixed(2) %> ],
+                  backgroundColor: ['#006400', '#228B22', '#32CD32', '#7CFC00'],
+                }]
+              };
+              const myPieChart = new Chart(ctx, {
+                type: 'pie',
+                data: chartData,
+                options: {
+                  responsive: true,
+                  plugins: {
+                    legend: {
+                      position: 'top',
+                    },
+                    title: {
+                      display: true,
+                      text: 'Distribución de la Huella de Carbono'
+                    }
+                  }
+                }
+              });
+            });
+          </script>
+        <% } %>
+
     <!-- Contenido Principal -->
     <div class="container">
         <h2 class="form-title">Calculadora de Huella de Carbono</h2>
@@ -104,21 +153,5 @@
         </form>
         
     </div>
-
-    <div class="container">
-        <h1>Resultados</h1>
-        <div class="pie-chart">
-          <canvas id="carbonFootprintChart" width="400" height="400"></canvas>
-          <div class="legend">
-            <div><span class="box" style="background-color: #006400;"></span> Transporte</div>
-            <div><span class="box" style="background-color: #228B22;"></span> Vivienda</div>
-            <div><span class="box" style="background-color: #32CD32;"></span> Alimentación</div>
-            <div><span class="box" style="background-color: #7CFC00;"></span> Consumo</div>
-          </div>
-        </div>
-      </div>
-      
-    
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
 <%- include("partials/footer"); -%>

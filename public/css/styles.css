@@ -232,3 +232,29 @@ img:hover {
   font-family: 'Open Sans', sans-serif;
 }
 
+.pie-chart {
+  display: flex; /* Use flexbox for layout */
+  flex-direction: column; /* Arrange items vertically */
+  align-items: center; /* Center align items */
+  margin-bottom: 20px; /* Space below the chart */
+}
+
+.legend {
+  display: flex; /* Use flexbox for legend layout */
+  justify-content: center; /* Center align the legend */
+  margin-top: 15px; /* Space above the legend */
+  font-family: Arial, sans-serif; /* Use a clean font for the legend */
+}
+
+.legend div {
+  margin-right: 20px; /* Space between legend items */
+  display: flex; /* Flexbox for legend item */
+  align-items: center; /* Center align items vertically */
+}
+
+canvas {
+  display: flex;
+  margin: 0 auto;
+  width: 400px;
+  height: 400px;
+}
