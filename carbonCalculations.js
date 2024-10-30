@@ -97,7 +97,7 @@ function calcularEmisionesResiduos(cantidadBasuraGenerada, porcentajeResiduosRec
   return emisionesResiduos;
 }
 
-// Calcula y devuelve la huella de carbono total en toneladas de CO₂
+// Calcula y devuelve la huella de carbono total y las emisiones individuales en toneladas de CO₂
 function calcularHuellaCarbonoTotal(userData) {
   const emisionesTransporte = calcularEmisionesTransporte(
     userData.tipoTransporte,
@@ -105,28 +105,32 @@ function calcularHuellaCarbonoTotal(userData) {
     userData.eficienciaVehiculo,
     userData.numeroVuelosAnuales
   );
-  console.log(`Emisiones de transporte: ${emisionesTransporte.toFixed(2)} toneladas de CO₂`);
 
   const emisionesVivienda = calcularEmisionesVivienda(
     userData.consumoElectricidad,
     userData.consumoGasNatural,
     userData.tipoCalefaccion
   );
-  console.log(`Emisiones de vivienda: ${emisionesVivienda.toFixed(2)} toneladas de CO₂`);
 
   const emisionesAlimentacion = calcularEmisionesAlimentacion(
     userData.tipoDieta,
     userData.frecuenciaConsumoCarne
   );
-  console.log(`Emisiones de alimentación: ${emisionesAlimentacion.toFixed(2)} toneladas de CO₂`);
 
   const emisionesResiduos = calcularEmisionesResiduos(
     userData.cantidadBasuraGenerada,
     userData.porcentajeResiduosReciclados
   );
-  console.log(`Emisiones de residuos: ${emisionesResiduos.toFixed(2)} toneladas de CO₂`);
 
-  return emisionesTransporte + emisionesVivienda + emisionesAlimentacion + emisionesResiduos;
+  const totalEmisiones = emisionesTransporte + emisionesVivienda + emisionesAlimentacion + emisionesResiduos;
+
+  return {
+    total: totalEmisiones,
+    transporte: emisionesTransporte,
+    vivienda: emisionesVivienda,
+    alimentacion: emisionesAlimentacion,
+    residuos: emisionesResiduos,
+  };
 }
 
 

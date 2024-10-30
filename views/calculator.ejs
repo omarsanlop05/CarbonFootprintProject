@@ -108,13 +108,17 @@
     <div class="container">
         <h1>Resultados</h1>
         <div class="pie-chart">
-            <div class="legend">
-              <div><span class="box" style="background-color: #006400;"></span> Transporte</div>
-              <div><span class="box" style="background-color: #228B22;"></span> Vivienda</div>
-              <div><span class="box" style="background-color: #32CD32;"></span> Alimentación</div>
-              <div><span class="box" style="background-color: #7CFC00;"></span> Consumo</div>
-            </div>
+          <canvas id="carbonFootprintChart" width="400" height="400"></canvas>
+          <div class="legend">
+            <div><span class="box" style="background-color: #006400;"></span> Transporte</div>
+            <div><span class="box" style="background-color: #228B22;"></span> Vivienda</div>
+            <div><span class="box" style="background-color: #32CD32;"></span> Alimentación</div>
+            <div><span class="box" style="background-color: #7CFC00;"></span> Consumo</div>
+          </div>
         </div>
-    </div>
+      </div>
+      
+    
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
 <%- include("partials/footer"); -%>

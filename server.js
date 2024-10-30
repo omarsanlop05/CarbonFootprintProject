@@ -98,10 +98,19 @@ app.post('/calculate', (req, res) => {
   };
 
   // Calcula la huella de carbono total usando la función importada
-  const huellaCarbonoTotal = carbonCalculations.calcularHuellaCarbonoTotal(userData);
+  const huellaCarbono = carbonCalculations.calcularHuellaCarbonoTotal(userData);
 
-  console.log(`Huella de carbono total: ${huellaCarbonoTotal.toFixed(2)} toneladas de CO₂`);
+  console.log(`Huella de carbono total: ${huellaCarbono.total.toFixed(2)} toneladas de CO₂`);
 
+  const porcentajeTransporte = (huellaCarbono.transporte / huellaCarbono.total) * 100;
+  const porcentajeVivienda = (huellaCarbono.vivienda / huellaCarbono.total) * 100;
+  const porcentajeAlimentacion = (huellaCarbono.alimentacion / huellaCarbono.total) * 100;
+  const porcentajeResiduos = (huellaCarbono.residuos / huellaCarbono.total) * 100;
+
+  console.log(`Emisiones de transporte: ${huellaCarbono.transporte.toFixed(2)} toneladas de CO₂ (${porcentajeTransporte.toFixed(2)}%)`);
+  console.log(`Emisiones de vivienda: ${huellaCarbono.vivienda.toFixed(2)} toneladas de CO₂ (${porcentajeVivienda.toFixed(2)}%)`);
+  console.log(`Emisiones de alimentación: ${huellaCarbono.alimentacion.toFixed(2)} toneladas de CO₂ (${porcentajeAlimentacion.toFixed(2)}%)`);
+  console.log(`Emisiones de residuos: ${huellaCarbono.residuos.toFixed(2)} toneladas de CO₂ (${porcentajeResiduos.toFixed(2)}%)`);
 
   // Redirect back to the calculator page
   res.redirect('/calculator');
