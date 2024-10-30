@@ -15,6 +15,9 @@ app.set('view engine', 'ejs');
 // Serve static files from the 'public' directory
 app.use(express.static('public'));
 
+// Importar el módulo de cálculo de huella de carbono
+const carbonCalculations = require('./carbonCalculations');
+
 // Initialize variables to store user input data
 // Note: Consider avoiding global variables in production code
 let tipoTransporte = 0;
@@ -51,14 +54,14 @@ app.get('/calculator', (req, res) => {
  */
 app.post('/calculate', (req, res) => {
   // Extract and assign values from the form input fields
-  tipoTransporte = req.body.transporte;
+  tipoTransporte = parseInt(req.body.transporte, 10) || 0;
   kilometrajeAnual = parseInt(req.body.kilometraje, 10) || 0;
   eficienciaVehiculo = parseFloat(req.body.eficiencia) || 0;
   numeroVuelosAnuales = parseInt(req.body.vuelos, 10) || 0;
   consumoElectricidad = parseInt(req.body.energia, 10) || 0;
   consumoGasNatural = parseInt(req.body.gas, 10) || 0;
-  tipoCalefaccion = req.body.calefaccion;
-  tipoDieta = req.body.dieta;
+  tipoCalefaccion = parseInt(req.body.calefaccion, 10) || 0;
+  tipoDieta = parseInt(req.body.dieta, 10) || 0;
   frecuenciaConsumoCarne = parseInt(req.body.frecuencia_carne, 10) || 0;
   cantidadBasuraGenerada = parseInt(req.body.basura, 10) || 0;
   porcentajeResiduosReciclados = parseInt(req.body.reciclaje, 10) || 0;
@@ -68,13 +71,37 @@ app.post('/calculate', (req, res) => {
   console.log('Kilometraje anual (km):', kilometrajeAnual);
   console.log('Eficiencia del vehículo (km/L):', eficienciaVehiculo);
   console.log('Número de vuelos anuales:', numeroVuelosAnuales);
+
   console.log('Consumo de electricidad (kWh/mes):', consumoElectricidad);
   console.log('Consumo de gas natural (m³/mes):', consumoGasNatural);
   console.log('Tipo de calefacción:', tipoCalefaccion);
+
   console.log('Tipo de dieta:', tipoDieta);
   console.log('Frecuencia de consumo de carne (días/semana):', frecuenciaConsumoCarne);
+
   console.log('Cantidad de basura generada (kg/semana):', cantidadBasuraGenerada);
   console.log('Porcentaje de residuos reciclados (%):', porcentajeResiduosReciclados);
+
+  // Crea un objeto con todos los datos para pasar a la función
+  const userData = {
+    tipoTransporte,
+    kilometrajeAnual,
+    eficienciaVehiculo,
+    numeroVuelosAnuales,
+    consumoElectricidad,
+    consumoGasNatural,
+    tipoCalefaccion,
+    tipoDieta,
+    frecuenciaConsumoCarne,
+    cantidadBasuraGenerada,
+    porcentajeResiduosReciclados
+  };
+
+  // Calcula la huella de carbono total usando la función importada
+  const huellaCarbonoTotal = carbonCalculations.calcularHuellaCarbonoTotal(userData);
+
+  console.log(`Huella de carbono total: ${huellaCarbonoTotal.toFixed(2)} toneladas de CO₂`);
+
 
   // Redirect back to the calculator page
   res.redirect('/calculator');
@@ -88,3 +115,4 @@ const PORT = process.env.PORT || 3000; // Use the PORT environment variable if a
 app.listen(PORT, () => {
   console.log(`Application listening on port ${PORT}`);
 });
+
