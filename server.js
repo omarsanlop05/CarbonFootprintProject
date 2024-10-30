@@ -1,5 +1,8 @@
-// Import the Express.js module to create a web server
+// Imports
+require('dotenv').config();
 const express = require('express');
+const carbonCalculations = require('./carbonCalculations');
+const mongoose = require("mongoose");
 
 // Create an instance of an Express application
 const app = express();
@@ -15,8 +18,28 @@ app.set('view engine', 'ejs'); // Set EJS as the view engine
 // Serve static files from the 'public' directory
 app.use(express.static('public')); // Makes static files accessible to the client
 
-// Import the module for carbon footprint calculations
-const carbonCalculations = require('./carbonCalculations');
+//Database on Mongoose initialization and configuration
+var user = process.env.DB_USER;
+var pass = process.env.DB_PASS;
+var db = process.env.DB;
+
+const mongoURL = `mongodb+srv://${user}:${pass}@cluster0.1pvct.mongodb.net/${db}?retryWrites=true&w=majority&appName=Cluster0`
+mongoose.connect(mongoURL, { useNewUrlParser: true, useUnifiedTopology: true});
+
+//Stablish data scheme and model
+const dataSchema = new mongoose.Schema({
+  porcentajeTransporte: { type: Number, required: true },
+  porcentajeVivienda: { type: Number, required: true },
+  porcentajeAlimentacion: { type: Number, required: true },
+  porcentajeResiduos: { type: Number, required: true },
+  totalTransporte: { type: Number, required: true },
+  totalVivienda: { type: Number, required: true },
+  totalAlimentacion: { type: Number, required: true },
+  totalResiduos: { type: Number, required: true },
+  huellaTotal: { type: Number, required: true }
+});
+dataSchema.set("strictQuery", true);
+const DataModel = mongoose.model('Data', dataSchema);
 
 // Initialize variables to store user input data
 // Note: Consider avoiding global variables in production code for better scalability
@@ -120,12 +143,24 @@ app.post('/calculate', (req, res) => {
   console.log(`Food emissions: ${huellaCarbono.alimentacion.toFixed(2)} tons of CO₂ (${porcentajeAlimentacion.toFixed(2)}%)`);
   console.log(`Waste emissions: ${huellaCarbono.residuos.toFixed(2)} tons of CO₂ (${porcentajeResiduos.toFixed(2)}%)`);
 
+  const newData = new DataModel({
+    porcentajeTransporte: porcentajeTransporte, 
+    porcentajeVivienda: porcentajeVivienda, 
+    porcentajeAlimentacion: porcentajeAlimentacion, 
+    porcentajeResiduos: porcentajeResiduos,
+    totalTransporte: totalTransporte,
+    totalVivienda: totalVivienda,
+    totalAlimentacion: totalAlimentacion,
+    totalResiduos: totalResiduos,
+    huellaTotal: huellaTotal
+  });
+  newData.save();
+
   // Redirect back to the calculator page with the calculated percentages
   res.render('calculator', { 
     porcentajeTransporte, 
     porcentajeVivienda, 
     porcentajeAlimentacion, 
-    porcentajeResiduos,
     porcentajeResiduos,
     totalTransporte,
     totalVivienda,
