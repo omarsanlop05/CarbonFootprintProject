@@ -5,7 +5,7 @@
 // Transporte (Coche y vuelos)
 function calcularEmisionesTransporte(tipoTransporte, kilometrajeAnual, eficienciaVehiculo, numeroVuelosAnuales) {
   const factorEmisionGasolina = 2.31; // kg CO₂ por litro
-  const factorEmisionTransportePublico = 0.05; // Emisiones promedio para transporte público (kg CO₂ por km)
+  const factorEmisionTransportePublico = 0.04; // kg CO₂ por km para transporte público
   let emisionesTransporte = 0;
 
   switch (tipoTransporte) {
@@ -25,7 +25,7 @@ function calcularEmisionesTransporte(tipoTransporte, kilometrajeAnual, eficienci
   }
 
   // Emisiones por vuelos
-  const emisionesVuelos = numeroVuelosAnuales * 0.15; // cada vuelo emite 0.15 toneladas de CO₂
+  const emisionesVuelos = numeroVuelosAnuales * 0.12; // cada vuelo emite 0.12 toneladas de CO₂
   
   return emisionesTransporte + emisionesVuelos;
 }
@@ -33,30 +33,27 @@ function calcularEmisionesTransporte(tipoTransporte, kilometrajeAnual, eficienci
 
 // Vivienda (Electricidad, gas natural y calefacción)
 function calcularEmisionesVivienda(consumoElectricidad, consumoGasNatural, tipoCalefaccion) {
-  const factorEmisionElectricidad = 0.47; // kg CO₂ por kWh
-  const factorEmisionGas = 1.54; // kg CO₂ por m³
-  const promedioEmisionCalefaccionElectricidad = 0.5; // toneladas de CO₂ promedio anual para calefacción eléctrica en México
-  const promedioEmisionCalefaccionGas = 1.2; // toneladas de CO₂ promedio anual para calefacción a gas natural en México
-  const promedioEmisionCalefaccionOtros = 0.8; // toneladas de CO₂ promedio anual para calefacción de otros tipos en México
+  const factorEmisionElectricidad = 0.408; // kg CO₂ por kWh
+  const factorEmisionGas = 1.45; // kg CO₂ por m³
+  const promedioEmisionCalefaccionElectricidad = 0.3; // toneladas de CO₂ para calefacción eléctrica en México
+  const promedioEmisionCalefaccionGas = 0.8; // toneladas de CO₂ para calefacción a gas natural en México
+  const promedioEmisionCalefaccionOtros = 0.5; // toneladas de CO₂ para calefacción de otros tipos en México
 
-  // Calcular emisiones por electricidad (usos generales)
   const consumoAnualElectricidad = consumoElectricidad * 12;
   const emisionesElectricidad = consumoAnualElectricidad * factorEmisionElectricidad / 1000; // toneladas
 
-  // Calcular emisiones por gas natural (usos generales)
   const consumoAnualGas = consumoGasNatural * 12;
   const emisionesGas = consumoAnualGas * factorEmisionGas / 1000; // toneladas
 
-  // Calcular emisiones específicas de calefacción según el tipo
   let emisionesCalefaccion = 0;
   switch (tipoCalefaccion) {
-    case 1: // Calefacción eléctrica
+    case 1: 
       emisionesCalefaccion = promedioEmisionCalefaccionElectricidad;
       break;
-    case 2: // Calefacción a gas natural
+    case 2: 
       emisionesCalefaccion = promedioEmisionCalefaccionGas;
       break;
-    case 3: // Otros tipos de calefacción
+    case 3: 
       emisionesCalefaccion = promedioEmisionCalefaccionOtros;
       break;
     default:
@@ -71,31 +68,29 @@ function calcularEmisionesVivienda(consumoElectricidad, consumoGasNatural, tipoC
 function calcularEmisionesAlimentacion(tipoDieta, frecuenciaConsumoCarne) {
   let factorEmisionDieta;
 
-  // Determinar el factor de emisión según el tipo de dieta
   switch (tipoDieta) {
-    case 1: // Dieta carnívora
-      factorEmisionDieta = 3.0; // toneladas CO₂ para dieta carnívora
+    case 1:
+      factorEmisionDieta = 2.5; // toneladas CO₂ para dieta carnívora
       break;
-    case 2: // Dieta vegetariana
-      factorEmisionDieta = 2.0; // toneladas CO₂ para dieta vegetariana
+    case 2: 
+      factorEmisionDieta = 1.6; // toneladas CO₂ para dieta vegetariana
       break;
-    case 3: // Dieta vegana
-      factorEmisionDieta = 1.0; // toneladas CO₂ para dieta vegana
+    case 3: 
+      factorEmisionDieta = 0.9; // toneladas CO₂ para dieta vegana
       break;
     default:
       console.warn("Tipo de dieta no válido");
-      return 0; // Retornar 0 si el tipo de dieta no es válido
+      return 0;
   }
 
-  // Calcular las emisiones adicionales por frecuencia de consumo de carne (días/semana)
-  const emisionesAdicionalesCarne = (frecuenciaConsumoCarne * 52 / 365) * 1.2; // Asumiendo 1.5 toneladas CO₂ por cada día de consumo de carne
+  const emisionesAdicionalesCarne = (frecuenciaConsumoCarne * 52 / 365) * 1.0; 
 
-  return factorEmisionDieta + emisionesAdicionalesCarne; // Retorna las emisiones totales
+  return factorEmisionDieta + emisionesAdicionalesCarne;
 }
 
 // Consumo y residuos
 function calcularEmisionesResiduos(cantidadBasuraGenerada, porcentajeResiduosReciclados) {
-  const factorEmisionResiduos = 2; // kg CO₂ por kg de basura
+  const factorEmisionResiduos = 1.5; // kg CO₂ por kg de basura
   const residuosAnuales = cantidadBasuraGenerada * 52;
   const emisionesResiduos = residuosAnuales * factorEmisionResiduos * (1 - porcentajeResiduosReciclados / 100) / 1000; // toneladas
   
