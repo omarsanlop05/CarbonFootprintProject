@@ -23,7 +23,7 @@ h1 {
   border-radius: 15px; /* Rounded corners */
   box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1); /* Subtle shadow effect */
   margin-top: 30px; /* Margin on top */
-  max-width: 900px !important; /* Max width of the container */
+  max-width: 900px; /* Max width of the container */
   margin-left: auto; /* Center container horizontally */
   margin-right: auto; /* Center container horizontally */
   transition: box-shadow 0.3s ease, transform 0.3s ease; /* Transition effects for hover */
@@ -168,6 +168,18 @@ h1 {
 
 /* Responsive Styles */
 @media (max-width: 768px) {
+  
+  .content {
+    flex-direction: column; /* Change to column layout on smaller screens */
+    align-items: center; /* Center items */
+  }
+
+  .pie-chart, .legend {
+    height: 400px;  /* Height remains the same */
+    width: 100%; /* Allow full width for each section */
+    margin: 10px 0; /* Margin between chart and legend */
+  }
+
   .container {
       padding: 20px; /* Adjust padding for smaller screens */
   }
@@ -250,8 +262,8 @@ img:hover {
   display: flex; /* Use flex layout */
   flex-direction: column; /* Stack items vertically */
   align-items: center; /* Center items */
-  margin: 20px; /* Margin */
-  padding: 20px; /* Padding */
+  margin: 1%; /* Margin */
+  padding: 1%; /* Padding */
 }
 
 .chart-container {
@@ -265,7 +277,7 @@ img:hover {
   display: flex; /* Usar flex para alinear gráfico y leyenda */
   width: 100%; /* Ocupa todo el ancho disponible */
   justify-content: space-between; /* Espacio entre gráfico y leyenda */
-  padding: 25px; /* Padding */
+  padding: 2%; /* Padding */
 }
 
 /* Legend for Pie Chart */
@@ -275,13 +287,13 @@ img:hover {
   flex-direction: column; /* Apilar elementos verticalmente */
   justify-content: space-around; /* Espaciado entre elementos */
   text-align: left; /* Alinear texto a la izquierda */
-  margin: 20px; /* Margin */
-  padding: 20px; /* Padding */
+  margin: 2%; /* Margin */
+  padding: 2%; /* Padding */
 }
 
 /* Legend Item Styles */
 .legend div {
-  margin-right: 20px; /* Right margin for legend items */
+  margin-right: 2%; /* Right margin for legend items */
   display: flex; /* Use flex layout for legend items */
   align-items: center; /* Center items vertically */
 }
