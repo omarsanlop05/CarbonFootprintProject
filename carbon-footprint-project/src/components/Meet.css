@@ -1,0 +1,20 @@
+/* Container Styles */
+.card-container {
+    display: grid; /* Use grid layout */
+    background-color: #B6D7A8; /* Light green background for container */
+    padding: 30px; /* Padding inside the container */
+    border-radius: 15px; /* Rounded corners */
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1); /* Subtle shadow effect */
+    margin-top: 30px; /* Margin on top */
+    max-width: 900px; /* Max width of the container */
+    margin-left: auto; /* Center container horizontally */
+    margin-right: auto; /* Center container horizontally */
+    transition: box-shadow 0.3s ease, transform 0.3s ease; /* Transition effects for hover */
+    color: black;
+}
+
+.img-style{
+    width: 150px;
+    height: 150px;
+    object-fit: cover;
+}

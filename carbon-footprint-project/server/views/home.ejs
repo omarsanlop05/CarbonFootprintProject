@@ -1,0 +1,73 @@
+<%- include("partials/header"); -%>
+
+<!-- Header Section -->
+<header class="bg-success text-white py-3">
+    <div class="container d-flex justify-content-between align-items-center">
+        <a  href="/"><img src="images/logo.jpeg" alt="Logo" class="logo"/></a> <!-- Logo image -->
+        <div class="d-flex justify-content-between align-items-center  w-100">
+            <h1 class="h3 mb-0" style="margin-left: 15px;">EcoWeb</h1>
+            <nav class="nav">
+                <form action="/calculator" method="get">
+                    <button type="submit" class="btn btn-light">Form</button> <!-- Button to navigate to the calculator form -->
+                </form>
+            </nav>
+        </div>
+    </div>
+</header>
+  
+<!-- Main Section -->
+<div class="container-fluid text-center py-5" id="inicio">
+    <h1 class="main-title">Welcome to Our Page</h1>
+    <p class="intro-text">Here you can calculate your personal carbon footprint and learn more about how to reduce your environmental impact.</p>
+    <a href="/calculator" class="btn btn-primary btn-lg">Go to the Form</a> <!-- Button to redirect to the form -->
+</div>
+
+<!-- Info Section -->
+<div class="container-fluid py-5" id="informacion">
+    <h1 class="form-title">Information About Carbon Footprint</h1>
+    <p>Here you can add informative content about carbon footprint, tips to reduce it, and more.</p>
+    
+    <!-- Basic Explanation -->
+    <section class="my-4">
+        <h2 class="category-title">What is a Carbon Footprint?</h2>
+        <p>The carbon footprint is a measure of the impact that our activities have on the environment, in terms of the amount of greenhouse gases we produce.</p>
+    </section>
+    
+    <!-- Tips to Reduce Carbon Footprint -->
+    <section class="my-4">
+        <h2 class="category-title">How to Reduce Your Carbon Footprint</h2>
+        <p>In this section, you can include tips and best practices for reducing your carbon footprint, such as minimizing plastic use, opting for sustainable transportation, etc.</p>
+    </section>
+</div>
+
+<!-- Meet Us Section -->
+<div class="container-fluid py-5" id="conocenos">
+    <h1 class="contact-title text-center">Meet Us</h1>
+    <p class="text-center">Get to know our team, the people behind the project committed to protecting the environment and reducing carbon footprints.</p>
+
+    <!-- Team Members -->
+    <div class="container">
+        <div class="row">
+            <!-- Member 1 -->
+            <div class="col-md-4 text-center mb-4 team-member">
+                <img src="images/alexis.jpg" alt="Member 1" class="img-fluid rounded-circle mb-2" style="width: 150px; height: 150px; object-fit: cover;">
+                <h4>Alexis Vargas</h4>
+                <p>ISGC Student</p> <!-- Student's course or description -->
+            </div>
+            <!-- Member 2 -->
+            <div class="col-md-4 text-center mb-4 team-member">
+                <img src="images/omar.jpg" alt="Member 2" class="img-fluid rounded-circle mb-2" style="width: 150px; height: 150px; object-fit: cover;">
+                <h4>Omar Sánchez</h4>
+                <p>ISGC Student</p> <!-- Student's course or description -->
+            </div>
+            <!-- Member 3 -->
+            <div class="col-md-4 text-center mb-4 team-member">
+                <img src="images/kenzo.jpg" alt="Member 3" class="img-fluid rounded-circle mb-2" style="width: 150px; height: 150px; object-fit: cover;">
+                <h4>Kenzo Matoo</h4>
+                <p>ISGC Student</p> <!-- Student's course or description -->
+            </div>
+        </div>
+    </div>
+</div>
+    
+<%- include("partials/footer"); -%>
