@@ -1,0 +1,90 @@
+/* General Styles */
+body {
+    background-color: #E7F4F2; 
+    font-family: "Arial", sans-serif;
+  }
+  
+  .container {
+    background-color: #A9D18E; /* Soft green for the form background */
+    padding: 30px;
+    border-radius: 15px; /* Rounded corners */
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+    max-width: 800px;
+    margin: 30px auto;
+    text-align: left; /* Align text to the left */
+  }
+  
+  /* Title Styles */
+  .form-title {
+    font-size: 2rem; /* Bigger font for the main title */
+    text-align: center; /* Centered title */
+    color: #6B8E23; /* Olive green for the title */
+    font-weight: bold;
+    margin-bottom: 30px;
+  }
+  
+  /* Section Titles */
+  .category-title {
+    font-size: 1.5rem; /* Larger font for section titles */
+    color: #6B8E23;
+    font-weight: bold;
+    margin-bottom: 15px;
+    margin-top: 20px;
+    text-align: left; /* Left alignment */
+  }
+  
+  /* Form Input Styles */
+  .form-label {
+    font-size: 1rem; /* Standard size for labels */
+    font-weight: bold;
+    color: #5A5A5A; /* Neutral gray color for labels */
+  }
+  
+  .form-control,
+  .form-select {
+    background-color: #D9EAD3; /* Softer green for inputs */
+    border: 1px solid #A9D18E; /* Match the border to the container */
+    border-radius: 10px; /* Rounded inputs */
+    padding: 10px;
+    margin-bottom: 15px;
+  }
+  
+  .form-control:focus,
+  .form-select:focus {
+    outline: none;
+    border: 1px solid #6B8E23; /* Highlight border when focused */
+    box-shadow: 0 0 5px rgba(107, 142, 35, 0.5); /* Soft glow */
+  }
+  
+  /* Button Styles */
+/* Botón personalizado */
+.btn-custom {
+    background-color: #f5f5dc; /* Beige color */
+    color: #3A3A3A; /* Dark gray text color */
+    font-size: 1rem; /* Font size */
+    padding: 10px 20px; /* Padding for the button */
+    border-radius: 5px; /* Rounded corners */
+    border: none; /* Remove border */
+    transition: background-color 0.3s ease, transform 0.2s ease; /* Smooth transitions */
+  }
+  
+  .btn-custom:hover {
+    background-color: #e5e5c0; /* Slightly darker beige on hover */
+    transform: scale(1.05); /* Slight scale effect on hover */
+  }  
+  
+  /* Responsive Design */
+  @media (max-width: 768px) {
+    .container {
+      padding: 20px;
+    }
+  
+    .form-title {
+      font-size: 1.8rem;
+    }
+  
+    .category-title {
+      font-size: 1.3rem;
+    }
+  }
+  
