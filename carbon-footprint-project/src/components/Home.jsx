@@ -5,6 +5,7 @@ import Welcome from './Welcome';
 import Info from "./Info";
 import Meet from "./Meet";
 import Footer from "./Footer";
+import Data from "./Data";
 
 function Home(){
     return(
@@ -17,6 +18,9 @@ function Home(){
 
             {/* Info Section */}
             <Info />
+
+            {/* Data Section*/}
+            <Data/>
 
             {/* Meet us Section */}
             <Meet />

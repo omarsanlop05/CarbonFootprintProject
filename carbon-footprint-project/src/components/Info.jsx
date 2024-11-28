@@ -26,20 +26,38 @@ function Info() {
                 </p>
             </section>
 
-            {/* Additional Information and Button */}
+            {/* Additional Information and Buttons */}
             <section className="mt-5 text-center">
                 <p>
-                    Learn more about global efforts to reduce carbon emissions and protect the environment by visiting the
-                    Greenpeace website. They work tirelessly to promote sustainability and advocate for climate change solutions.
+                    Learn more about global efforts to reduce carbon emissions and protect the environment by visiting these
+                    organizations. They are dedicated to sustainability and climate action.
                 </p>
-                <Button
-                    variant="success"
-                    href="https://www.greenpeace.org/international/"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                >
-                    Visit Greenpeace
-                </Button>
+                <div className="d-flex justify-content-center gap-3">
+                    <Button
+                        variant="success"
+                        href="https://www.greenpeace.org/international/"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                    >
+                        Visit Greenpeace
+                    </Button>
+                    <Button
+                        variant="success"
+                        href="https://www.wwf.org/"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                    >
+                        Visit WWF
+                    </Button>
+                    <Button
+                        variant="success"
+                        href="https://www.nature.org/en-us/"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                    >
+                        Visit The Nature Conservancy
+                    </Button>
+                </div>
             </section>
         </Container>
     );
