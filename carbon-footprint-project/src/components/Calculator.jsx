@@ -59,7 +59,7 @@ const Calculator = () => {
       <Header />
 
       {/* Main Content Section */}
-      <Container className="my-5">
+      <Container className="my-4">
         <h2 className="form-title">Carbon Footprint Calculator</h2>
 
         {/* Form Section */}
@@ -178,14 +178,22 @@ const Calculator = () => {
             </Form.Group>
             <Form.Group className="mb-3">
               <Form.Label>Frequency of Meat Consumption (days/week)</Form.Label>
-              <Form.Control
+              <Form.Select
                 type="number"
                 id="frecuencia_carne"
                 name="frecuencia_carne"
-                placeholder="Enter days per week"
                 value={formData.frecuencia_carne}
                 onChange={handleChange}
-              />
+              >
+                <option value="">Enter days per week</option>
+                <option value="1">1 day</option>
+                <option value="2">2 days</option>
+                <option value="3">3 days</option>
+                <option value="4">4 days</option>
+                <option value="5">5 days</option>
+                <option value="6">6 days</option>
+                <option value="7">7 days</option>
+              </Form.Select>
             </Form.Group>
           </div>
 
@@ -205,14 +213,17 @@ const Calculator = () => {
             </Form.Group>
             <Form.Group className="mb-3">
               <Form.Label>Percentage of Recycled Waste (%)</Form.Label>
-              <Form.Control
+              <Form.Range
                 type="number"
                 id="reciclaje"
                 name="reciclaje"
-                placeholder="Enter recycled percentage"
+                min="0"
+                max="100"
+                step="1"
                 value={formData.reciclaje}
                 onChange={handleChange}
               />
+              <div className="mt-2 text-center fw-bold">{formData.reciclaje}%</div>
             </Form.Group>
           </div>
 

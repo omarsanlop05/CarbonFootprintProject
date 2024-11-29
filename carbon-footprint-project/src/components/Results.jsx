@@ -7,7 +7,7 @@ ChartJS.register(ArcElement, Tooltip, Legend);
 
 const Results = ({ results }) => {
   if (!results || results.huellaTotal === 0) {
-    return <p className="no-results">Complete the form to see your results!</p>;
+    return <div className="results-container">Complete the form to see your results!</div>;
   }
 
   return (
