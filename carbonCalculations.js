@@ -131,10 +131,14 @@ function calcularHuellaCarbonoTotal(userData) {
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 // Exporta todas las funciones
 =======
 // Export all functions for use in other modules
 >>>>>>> 5de9867c1d976ea58980af56bbc2d713c6ec9aac
+=======
+// Export all functions for use in other modules
+>>>>>>> 170d19a13a2709e69d327efd0827406e4b4ac453
 module.exports = {
   calcularEmisionesTransporte,
   calcularEmisionesVivienda,

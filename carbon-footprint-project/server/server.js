@@ -49,7 +49,6 @@ const dataSchema = new mongoose.Schema({
   totalResiduos: { type: Number, required: true },
   huellaTotal: { type: Number, required: true }
 });
-
 dataSchema.set("strictQuery", true);
 const DataModel = mongoose.model('Data', dataSchema);
 

@@ -124,6 +124,7 @@ app.post('/calculate', (req, res) => {
   const huellaCarbono = carbonCalculations.calcularHuellaCarbonoTotal(userData);
 
   console.log(`Total carbon footprint: ${huellaCarbono.total.toFixed(2)} tons of CO₂`);
+<<<<<<< HEAD
 
   const totalTransporte = huellaCarbono.transporte.toFixed(2);
   const totalVivienda = huellaCarbono.vivienda.toFixed(2);
@@ -139,6 +140,13 @@ app.post('/calculate', (req, res) => {
   const porcentajeResiduos = (huellaCarbono.residuos / huellaCarbono.total) * 100;
 =======
 >>>>>>> 5de9867c1d976ea58980af56bbc2d713c6ec9aac
+=======
+
+  const totalTransporte = huellaCarbono.transporte.toFixed(2);
+  const totalVivienda = huellaCarbono.vivienda.toFixed(2);
+  const totalAlimentacion = huellaCarbono.alimentacion.toFixed(2);
+  const totalResiduos = huellaCarbono.residuos.toFixed(2);
+>>>>>>> 170d19a13a2709e69d327efd0827406e4b4ac453
 
   const huellaTotal = parseInt((huellaCarbono.total), 10);
 
@@ -177,10 +185,14 @@ app.post('/calculate', (req, res) => {
     totalAlimentacion,
     totalResiduos,
 <<<<<<< HEAD
+<<<<<<< HEAD
     huellaTotal
 =======
     huellaTotal
 >>>>>>> 5de9867c1d976ea58980af56bbc2d713c6ec9aac
+=======
+    huellaTotal
+>>>>>>> 170d19a13a2709e69d327efd0827406e4b4ac453
   });
 });
 
