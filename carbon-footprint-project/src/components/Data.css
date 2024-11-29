@@ -1,0 +1,21 @@
+.fondo-data{
+    background-color: #6B8E23;
+    text-align: left;
+}
+
+.form-title1{
+    font-size: 2rem; /* Size */
+    text-align: center; /* Centered text */
+    color: #E7F4F2; /* Olive green color for form titles */
+    font-size: 2rem; /* Font size for form titles */
+    font-weight: bold; /* Bold text */
+    margin-bottom: 20px; /* Bottom margin */
+}
+
+/* Category Titles */
+.category-title1 {
+    font-size: 1.5rem; /* Font size for category titles */
+    color: #E7F4F2; /* Olive green color for category titles */
+    margin-bottom: 15px; /* Bottom margin */
+    text-align: left; /* Left margin */
+  }

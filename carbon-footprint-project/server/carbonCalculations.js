@@ -130,11 +130,7 @@ function calcularHuellaCarbonoTotal(userData) {
   };
 }
 
-<<<<<<< HEAD
-// Exporta todas las funciones
-=======
 // Export all functions for use in other modules
->>>>>>> 5de9867c1d976ea58980af56bbc2d713c6ec9aac
 module.exports = {
   calcularEmisionesTransporte,
   calcularEmisionesVivienda,

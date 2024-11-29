@@ -1,30 +1,41 @@
-// Imports
 require('dotenv').config();
 const express = require('express');
 const carbonCalculations = require('./carbonCalculations');
 const mongoose = require("mongoose");
 
-// Create an instance of an Express application
 const app = express();
+const cors = require('cors');
 
-// Middleware to parse incoming JSON and URL-encoded data
-app.use(express.json()); // Parses JSON bodies from incoming requests
-app.use(express.urlencoded({ extended: true })); // Parses URL-encoded bodies from incoming requests
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
-// Set up EJS (Embedded JavaScript) as the view engine for rendering views
-app.engine('ejs', require('ejs').renderFile); // Use EJS for rendering
-app.set('view engine', 'ejs'); // Set EJS as the view engine
+app.engine('ejs', require('ejs').renderFile);
+app.set('view engine', 'ejs');
 
-// Serve static files from the 'public' directory
-app.use(express.static('public')); // Makes static files accessible to the client
+app.use(express.static('public'));
 
-//Database on Mongoose initialization and configuration
+app.use(cors({
+  origin: 'http://localhost:3000', // Adjust if necessary
+}));
+
+//Database on Mongoose initialization and  configuration
 var user = process.env.DB_USER;
 var pass = process.env.DB_PASS;
 var db = process.env.DB;
 
-const mongoURL = `mongodb+srv://${user}:${pass}@cluster0.1pvct.mongodb.net/${db}?retryWrites=true&w=majority&appName=Cluster0`
-mongoose.connect(mongoURL, { useNewUrlParser: true, useUnifiedTopology: true});
+const mongoURL = `mongodb+srv://${user}:${pass}@cluster0.1pvct.mongodb.net/${db}?retryWrites=true&w=majority&appName=Cluster0`;
+console.log(mongoURL);
+mongoose.connect(mongoURL, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+  serverSelectionTimeoutMS: 30000, // Increase timeout to 30 seconds
+});
+mongoose.connection.on('error', (err) => {
+  console.error('MongoDB connection error:', err);
+});
+mongoose.connection.once('open', () => {
+  console.log('Connected to MongoDB successfully!');
+});
 
 //Stablish data scheme and model
 const dataSchema = new mongoose.Schema({
@@ -38,6 +49,7 @@ const dataSchema = new mongoose.Schema({
   totalResiduos: { type: Number, required: true },
   huellaTotal: { type: Number, required: true }
 });
+
 dataSchema.set("strictQuery", true);
 const DataModel = mongoose.model('Data', dataSchema);
 
@@ -55,26 +67,14 @@ let frecuenciaConsumoCarne = 0; // Frequency of meat consumption (days per week)
 let cantidadBasuraGenerada = 0; // Weekly waste generation in kg
 let porcentajeResiduosReciclados = 0; // Percentage of waste that is recycled
 
-/**
- * Route: GET /
- * Description: Render the home page (home.ejs)
- */
 app.get('/', (req, res) => {
-  res.render('home'); // Render the home view
+  res.render('home'); 
 });
 
-/**
- * Route: GET /calculator
- * Description: Render the calculator form page (calculator.ejs)
- */
 app.get('/calculator', (req, res) => {
   res.render('calculator'); // Render the calculator view
 });
 
-/**
- * Route: POST /calculate
- * Description: Process form data from the calculator and calculate the carbon footprint
- */
 app.post('/calculate', (req, res) => {
   // Extract and assign values from the form input fields
   tipoTransporte = parseInt(req.body.transporte, 10) || 0; // Parse transportation type
@@ -125,22 +125,11 @@ app.post('/calculate', (req, res) => {
 
   console.log(`Total carbon footprint: ${huellaCarbono.total.toFixed(2)} tons of CO₂`);
 
-  const totalTransporte = huellaCarbono.transporte.toFixed(2);
-  const totalVivienda = huellaCarbono.vivienda.toFixed(2);
-  const totalAlimentacion = huellaCarbono.alimentacion.toFixed(2);
-  const totalResiduos = huellaCarbono.residuos.toFixed(2);
-<<<<<<< HEAD
-
-  const huellaTotal = parseInt((huellaCarbono.total), 10);
-
-  const porcentajeTransporte = (huellaCarbono.transporte / huellaCarbono.total) * 100;
-  const porcentajeVivienda = (huellaCarbono.vivienda / huellaCarbono.total) * 100;
-  const porcentajeAlimentacion = (huellaCarbono.alimentacion / huellaCarbono.total) * 100;
-  const porcentajeResiduos = (huellaCarbono.residuos / huellaCarbono.total) * 100;
-=======
->>>>>>> 5de9867c1d976ea58980af56bbc2d713c6ec9aac
-
-  const huellaTotal = parseInt((huellaCarbono.total), 10);
+  const totalTransporte = parseFloat(huellaCarbono.transporte.toFixed(2));
+  const totalVivienda = parseFloat(huellaCarbono.vivienda.toFixed(2));
+  const totalAlimentacion = parseFloat(huellaCarbono.alimentacion.toFixed(2));
+  const totalResiduos = parseFloat(huellaCarbono.residuos.toFixed(2));
+  const huellaTotal = parseFloat(huellaCarbono.total.toFixed(2));
 
   // Calculate the percentage contributions of each category to the total carbon footprint
   const porcentajeTransporte = (huellaCarbono.transporte / huellaCarbono.total) * 100; // Transportation emissions percentage
@@ -165,30 +154,22 @@ app.post('/calculate', (req, res) => {
     huellaTotal: huellaTotal
   });
   newData.save();
-
-  // Redirect back to the calculator page with the calculated percentages
-  res.render('calculator', { 
-    porcentajeTransporte, 
-    porcentajeVivienda, 
-    porcentajeAlimentacion, 
-    porcentajeResiduos,
-    totalTransporte,
-    totalVivienda,
-    totalAlimentacion,
-    totalResiduos,
-<<<<<<< HEAD
-    huellaTotal
-=======
-    huellaTotal
->>>>>>> 5de9867c1d976ea58980af56bbc2d713c6ec9aac
-  });
+  
+  // Añadir una respuesta JSON en el servidor
+    res.json({ 
+      porcentajeTransporte, 
+      porcentajeVivienda, 
+      porcentajeAlimentacion, 
+      porcentajeResiduos,
+      totalTransporte,
+      totalVivienda,
+      totalAlimentacion,
+      totalResiduos,
+      huellaTotal
+    });
 });
 
-/**
- * Start the Express application
- * Listen on the specified port (default is 3000)
- */
-const PORT = process.env.PORT || 3000; // Use the PORT environment variable if available
+const PORT = process.env.PORT || 5000; // Use the PORT environment variable if available
 app.listen(PORT, () => {
   console.log(`Application listening on port ${PORT}`); // Log that the application has started
 });
