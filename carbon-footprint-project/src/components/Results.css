@@ -9,6 +9,11 @@
   text-align: left; /* Align text to the left */
 }
 
+.preresults{
+  color: white;
+  font-weight: bold;
+}
+
 /* Title of the results section */
 .results-title {
   font-size: 2rem; /* Large font size */

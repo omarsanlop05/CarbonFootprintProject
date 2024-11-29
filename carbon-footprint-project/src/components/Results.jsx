@@ -7,7 +7,7 @@ ChartJS.register(ArcElement, Tooltip, Legend);
 
 const Results = ({ results }) => {
   if (!results || results.huellaTotal === 0) {
-    return <div className="results-container">Complete the form to see your results!</div>;
+    return <p className="preresults">Complete the form to see your results!</p>;
   }
 
   return (
@@ -23,7 +23,7 @@ const Results = ({ results }) => {
       </p>
       <p className="result-item">
         <span className="result-highlight">Food:</span> {results.totalAlimentacion.toFixed(2)} tons of CO₂
-      </p>
+ env.local  </p>
       <p className="result-item">
         <span className="result-highlight">Waste:</span> {results.totalResiduos.toFixed(2)} tons of CO₂
       </p>

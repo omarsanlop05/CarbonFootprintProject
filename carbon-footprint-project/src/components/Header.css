@@ -1,16 +1,16 @@
 .logo {
     border-radius: 50%; /* Circular logo */
-    width: 100px; /* Logo width */
-    height: 100px; /* Automatic height */
-    margin-right: 15px; /* Right margin */
+    max-width: 100px; /* Logo width */
+    height: auto; /* Automatic height */
+    margin: 15px; /* Right margin */
     transition: transform 0.3s ease; /* Transition effect on hover */
 }
 
 .titles {
-    color: white !important;
+    color: black !important;
 }
 
 .background {
     background-color: #B6D7A8; /* Dark background color */
-    height: 120px;
+    max-width: 90%;
 }

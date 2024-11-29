@@ -1,0 +1,120 @@
+/* General Container */
+.about-container {
+    padding: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+    color: #333;
+    line-height: 1.6;
+    font-family: Arial, sans-serif;
+}
+
+/* Hero Section */
+.hero-section {
+    text-align: center;
+    background-color: #B6D7A8;
+    padding: 2rem;
+    margin-bottom: 2rem;
+    border-radius: 8px;
+}
+
+.hero-section h1 {
+    font-size: 2.5rem;
+    color: #2d6a4f;
+    margin-bottom: 1rem;
+}
+
+.hero-section p {
+    font-size: 1.2rem;
+}
+
+/* Content Sections */
+.content-section {
+    margin-top: 1rem;
+}
+
+.section {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    margin-bottom: 2rem;
+    gap: 1rem;
+}
+
+.section:nth-child(odd) {
+    flex-direction: row-reverse;
+}
+
+.section .text {
+    color: white;
+    flex: 1;
+    min-width: 300px;
+}
+
+.section .image {
+    flex: 1;
+    text-align: center;
+    min-width: 50%;
+}
+
+.responsive-image {
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px;
+    object-fit: cover;
+}
+
+/* Call-to-Action Section */
+.call-to-action {
+    text-align: center;
+    background-color: #B6D7A8;
+    padding: 2rem;
+    border-radius: 8px;
+}
+
+.call-to-action ul {
+    list-style-type: disc;
+    margin: 1rem 0;
+    padding-left: 1.5rem;
+    text-align: left;
+    display: inline-block; /* Align the list in the center */
+    text-align: center;
+}
+
+.call-to-action p {
+    margin-bottom: 1.5rem;
+}
+
+.call-to-action-text{
+    color: black;
+    flex: 1;
+    
+}
+
+.rounded-image {
+    border-radius: 50%;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .section {
+        flex-direction: column;
+    }
+
+    .hero-section h1 {
+        font-size: 2rem;
+    }
+
+    .section .text {
+        text-align: center;
+    }
+
+    /* Adjust image size for mobile screens */
+    .section .image img {
+        max-width: 100%;
+        height: auto;
+    }
+
+    .call-to-action ul {
+        text-align: center;
+    }
+}
