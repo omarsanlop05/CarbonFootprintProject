@@ -6,17 +6,11 @@
     "@testing-library/jest-dom": "^5.17.0",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
-<<<<<<< HEAD
     "axios": "^1.7.8",
     "bootstrap": "^5.3.3",
     "chart.js": "^4.4.6",
     "cors": "^2.8.5",
     "mongoose": "^8.8.3",
-=======
-    "axios": "^1.7.7",
-    "bootstrap": "^5.3.3",
-    "chart.js": "^4.4.6",
->>>>>>> 170d19a13a2709e69d327efd0827406e4b4ac453
     "react": "^18.3.1",
     "react-bootstrap": "^2.10.5",
     "react-chartjs-2": "^5.2.0",
@@ -30,11 +24,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-<<<<<<< HEAD
     "server": "nodemon server.js --prefix server",
-=======
-    "server": "npm run server --prefix server",
->>>>>>> 170d19a13a2709e69d327efd0827406e4b4ac453
     "client": "npm start",
     "dev": "concurrently \"npm run server\" \"npm run client\""
   },

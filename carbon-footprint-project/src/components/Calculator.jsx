@@ -3,12 +3,8 @@ import "./Calculator.css";
 import Header from "./Header";
 import Footer from "./Footer";
 import Results from "./Results"; 
-<<<<<<< HEAD
 import axios from 'axios';
 import { Container, Form } from "react-bootstrap";
-=======
-import { Container, Form, Button } from "react-bootstrap";
->>>>>>> 170d19a13a2709e69d327efd0827406e4b4ac453
 
 const Calculator = () => {
   const [formData, setFormData] = useState({
@@ -45,7 +41,6 @@ const Calculator = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-<<<<<<< HEAD
       const response = await axios.post("http://localhost:5000/calculate", formData, {
         headers: { "Content-Type": "application/json" },
       });
@@ -53,24 +48,11 @@ const Calculator = () => {
       console.log(response); // Axios includes status, headers, etc.
       console.log(response.data); // The actual data returned from the API
       setResults(response.data); // Assuming response.data contains the desired result
-=======
-      const response = await fetch("/calculate", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(formData),
-      });
-      const data = await response.json();
-      setResults(data); 
->>>>>>> 170d19a13a2709e69d327efd0827406e4b4ac453
     } catch (error) {
       console.error("Error calculating carbon footprint:", error);
     }
   };
 
-<<<<<<< HEAD
-
-=======
->>>>>>> 170d19a13a2709e69d327efd0827406e4b4ac453
   return (
     <>
       {/* Header Section */}
@@ -234,18 +216,12 @@ const Calculator = () => {
             </Form.Group>
           </div>
 
-<<<<<<< HEAD
           <div className="text-center mt-4">
             <button 
               type="button" 
               className="btn-custom" 
               onClick={handleSubmit}
             >
-=======
-          {/* Submit Button */}
-          <div className="text-center mt-4">
-            <button type="submit" className="btn-custom">
->>>>>>> 170d19a13a2709e69d327efd0827406e4b4ac453
               Calculate Carbon Footprint
             </button>
           </div>
