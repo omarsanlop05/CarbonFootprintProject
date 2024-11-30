@@ -2,6 +2,17 @@
   text-align: center;
 }
 
+.text-color{
+  color: white;
+}
+
+h4{
+  padding: 30px;
+  max-width: 700px;
+  margin: 30px auto;
+  text-align: center;
+}
+
 .App-logo {
   height: 40vmin;
   pointer-events: none;

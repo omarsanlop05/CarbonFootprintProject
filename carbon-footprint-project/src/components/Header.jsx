@@ -1,12 +1,18 @@
 import React from "react";
 import './Header.css';
 import { Container, Navbar, Nav, Button, Dropdown, NavLink } from "react-bootstrap";
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
-function Header() {
+function Header(props) {
+    const navigate = useNavigate(); // Hook para navegación
 
-    let location = useLocation();
-    var currentLocation = location.pathname === "/calculator";
+    const handleButtonClick = () => {
+        if (props.logState) {
+          // Si está logueado, desloguear y redirigir a "/"
+          props.action(false); // Cambiar estado de logueo a false
+        }
+        navigate("/"); // Redirigir a "/"
+      };
 
     return (
         <Navbar bg="success" variant="dark" expand="lg" className="py-3">
@@ -25,10 +31,10 @@ function Header() {
 
                     <Nav>
                         <NavLink as={Link} to="/">
-                            Home
+                            <p className="nav">Home</p>
                         </NavLink>
                         <NavLink as={Link} to="/about">
-                            About
+                            <p className="nav">About</p>
                         </NavLink>
                     </Nav>
 
@@ -63,12 +69,8 @@ function Header() {
                         </Dropdown.Menu>
                     </Dropdown>
 
-                    {/* Navegación adicional */}
-                    <Nav>
-                        <Button variant="success" as={Link} to={currentLocation ? "/" : "/calculator"}>
-                            {currentLocation ? "Home" : "Form"}
-                        </Button>
-                    </Nav>
+                    <Button variant="outline-success" onClick={handleButtonClick}>{props.logState ? "Log Out" : "Log In"}</Button>
+                    
                 </Navbar.Collapse>
             </Container>
         </Navbar>

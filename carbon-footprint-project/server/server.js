@@ -22,9 +22,9 @@ app.use(cors({
 var user = process.env.DB_USER;
 var pass = process.env.DB_PASS;
 var db = process.env.DB;
+var db = process.env.DB2;
 
 const mongoURL = `mongodb+srv://${user}:${pass}@cluster0.1pvct.mongodb.net/${db}?retryWrites=true&w=majority&appName=Cluster0`;
-console.log(mongoURL);
 mongoose.connect(mongoURL, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
@@ -68,6 +68,39 @@ let porcentajeResiduosReciclados = 0; // Percentage of waste that is recycled
 
 app.get('/', (req, res) => {
   res.render('home'); 
+});
+
+const authorizedUsers = [
+  { 
+    user: "jalberto",
+    password: "123" 
+  }
+];
+
+app.post("/register", async (req, res) => {
+  const { user, password } = req.body;
+
+  // Verificar si el usuario ya existe
+  const foundUser = authorizedUsers.find(u => u.user === user);
+  if (foundUser) {
+    return res.json({ status: "User already exists", statusCode: -1 });
+  }
+
+  authorizedUsers.push({ user, password});
+
+  res.json({ status: "Account created successfully", statusCode: 1 });
+});
+
+app.post("/login", (req, res) => {
+  const { user, password } = req.body;
+  const foundUser = authorizedUsers.find(u => u.user === user);
+  const foundPassword = authorizedUsers.find(u => u.password === password);
+
+  if (foundUser && foundPassword) {
+    res.json({ status: "Authorized", statusCode: 1, user });
+  } else {
+    res.json({ status: "Unauthorized", statusCode: -1 });
+  }
 });
 
 app.get('/calculator', (req, res) => {
