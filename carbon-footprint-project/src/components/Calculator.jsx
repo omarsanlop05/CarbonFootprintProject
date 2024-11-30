@@ -40,7 +40,7 @@ const Calculator = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post("http://localhost:5000/calculate", formData, {
+      const response = await axios.post("https://carbon-footprint-project.onrender.com/calculate", formData, {
         headers: { "Content-Type": "application/json" },
       });
       
