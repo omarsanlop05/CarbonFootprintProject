@@ -18,7 +18,7 @@ app.use(cors({
   origin: 'http://localhost:3000', // Adjust if necessary
 }));
 
-//Database on Mongoose initialization and  configuration
+//Database on Mongoose initialization and configuration
 var user = process.env.DB_USER;
 var pass = process.env.DB_PASS;
 var db = process.env.DB;
