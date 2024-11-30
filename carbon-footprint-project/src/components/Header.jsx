@@ -27,7 +27,7 @@ function Header(props) {
                 <Navbar.Toggle aria-controls="navbar-nav" />
 
                 {/* Contenido de la navbar */}
-                <Navbar.Collapse id="navbar-nav" className="justify-content-between">
+                <Navbar.Collapse id="navbar-nav">
 
                     <Nav>
                         <NavLink as={Link} to="/">
@@ -38,6 +38,7 @@ function Header(props) {
                         </NavLink>
                     </Nav>
 
+                    <div className="navbar-right">
                     {/* Menú desplegable de organizaciones */}
                     <Dropdown className="me-3">
                         <Dropdown.Toggle variant="success" id="dropdown-basic">
@@ -70,6 +71,7 @@ function Header(props) {
                     </Dropdown>
 
                     <Button variant="outline-success" onClick={handleButtonClick}>{props.logState ? "Log Out" : "Log In"}</Button>
+                    </div>
                     
                 </Navbar.Collapse>
             </Container>

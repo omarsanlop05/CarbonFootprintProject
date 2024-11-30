@@ -12,6 +12,7 @@ import { Container, Form, Button } from "react-bootstrap";
 import Register from "./components/Register";
 
 function App() {
+  const [statusMessage, setStatusMessage] = useState("");
   const [loggedIn, setLoggedIn] = useState(false);
   let location = useLocation();
 
@@ -32,19 +33,21 @@ function App() {
 
     const handleLogin = async (e) => {
       e.preventDefault();
-      console.log(loginData.user)
-      console.log(loginData.password)
       try {
         const res = await axios.post("http://localhost:5000/login", loginData, {
           headers: { "Content-Type": "application/json" },
         });
     
         if (res.data.statusCode === 1) {
-          setLoggedIn(true) 
-        } else console.log("User not found")
+          setStatusMessage("Logged in successfully");
+          setTimeout(() => setLoggedIn(true) , 2000);
+        } else {
+          setStatusMessage("User or password incorrect.");
+        }
     
       } catch(err) {
           console.error("Error in login: ",err);
+          setStatusMessage("An error occurred while loggin in");
       }
     };
 
@@ -99,6 +102,8 @@ function App() {
                         Login
                         </button>
                     </div>
+
+                    {statusMessage && <p className="mt-3 text-center">{statusMessage}</p>}
 
                     <div className="text-center mt-4"> 
                        <Link to="/register">Dont have an account? click here</Link> 

@@ -18,3 +18,8 @@
 .nav{
     color: black;
 }
+
+.navbar-right {
+    display: flex;
+    margin-left: auto; /* Empuja los elementos hacia la derecha */
+  }

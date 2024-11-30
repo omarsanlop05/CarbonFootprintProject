@@ -22,19 +22,39 @@ app.use(cors({
 var user = process.env.DB_USER;
 var pass = process.env.DB_PASS;
 var db = process.env.DB;
-var db = process.env.DB2;
+
+var db2 = process.env.DB2;
 
 const mongoURL = `mongodb+srv://${user}:${pass}@cluster0.1pvct.mongodb.net/${db}?retryWrites=true&w=majority&appName=Cluster0`;
-mongoose.connect(mongoURL, {
+
+const mongoURL2 = `mongodb+srv://${user}:${pass}@cluster0.1pvct.mongodb.net/${db2}?retryWrites=true&w=majority&appName=Cluster0`;
+
+const connection1 = mongoose.createConnection(mongoURL, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
   serverSelectionTimeoutMS: 30000, // Increase timeout to 30 seconds
 });
-mongoose.connection.on('error', (err) => {
-  console.error('MongoDB connection error:', err);
+
+const connection2 = mongoose.createConnection(mongoURL2, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+  serverSelectionTimeoutMS: 30000, // Increase timeout to 30 seconds
 });
-mongoose.connection.once('open', () => {
-  console.log('Connected to MongoDB successfully!');
+
+connection1.once('open', () => {
+  console.log('Connected to MongoDB Database footprint successfully!');
+});
+
+connection2.once('open', () => {
+  console.log('Connected to MongoDB Database profiles successfully!');
+});
+
+connection1.on('error', (err) => {
+  console.error('Error connecting to Database footprints:', err);
+});
+
+connection2.on('error', (err) => {
+  console.error('Error connecting to Database users:', err);
 });
 
 //Stablish data scheme and model
@@ -50,7 +70,14 @@ const dataSchema = new mongoose.Schema({
   huellaTotal: { type: Number, required: true }
 });
 dataSchema.set("strictQuery", true);
-const DataModel = mongoose.model('Data', dataSchema);
+const DataModel = connection1.model('Data', dataSchema);
+
+const dataSchema2 = new mongoose.Schema({
+  user: { type: String, required: true }, // Usa String en lugar de Text
+  password: { type: String, required: true }, // Usa String en lugar de Text
+});
+const UserModel = connection2.model('User', dataSchema2);
+
 
 // Initialize variables to store user input data
 // Note: Consider avoiding global variables in production code for better scalability
@@ -70,33 +97,57 @@ app.get('/', (req, res) => {
   res.render('home'); 
 });
 
-const authorizedUsers = [
-  { 
-    user: "jalberto",
-    password: "123" 
+
+const authorizedUsers = [];
+
+async function loadUsers(){
+  try {
+    const users = await UserModel.find();
+    authorizedUsers.push(...users.map(user => ({
+      user: user.user,
+      password: user.password,
+    })));
+
+    console.log("Usuarios cargados desde la base de datos:", authorizedUsers);
+  } catch (error) {
+    console.error("Error al cargar usuarios desde la base de datos:", error);
   }
-];
+};
+
+loadUsers();
+
 
 app.post("/register", async (req, res) => {
   const { user, password } = req.body;
 
-  // Verificar si el usuario ya existe
   const foundUser = authorizedUsers.find(u => u.user === user);
   if (foundUser) {
     return res.json({ status: "User already exists", statusCode: -1 });
   }
 
-  authorizedUsers.push({ user, password});
+  const newUser = new UserModel({
+    user: user,
+    password: password,
+  });
 
-  res.json({ status: "Account created successfully", statusCode: 1 });
+  try {
+    await newUser.save();
+
+    authorizedUsers.push({ user, password });
+
+    res.json({ status: "Account created successfully", statusCode: 1 });
+  } catch (error) {
+    console.error("Error al registrar usuario:", error);
+    res.status(500).json({ status: "Error", statusCode: -1 });
+  }
 });
+
 
 app.post("/login", (req, res) => {
   const { user, password } = req.body;
-  const foundUser = authorizedUsers.find(u => u.user === user);
-  const foundPassword = authorizedUsers.find(u => u.password === password);
+  const foundUser = authorizedUsers.find(u => u.user === user && u.password === password);
 
-  if (foundUser && foundPassword) {
+  if (foundUser) {
     res.json({ status: "Authorized", statusCode: 1, user });
   } else {
     res.json({ status: "Unauthorized", statusCode: -1 });
