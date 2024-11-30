@@ -1,10 +1,9 @@
 import React, { useState } from "react";
 import "./Calculator.css";
-import Header from "./Header";
-import Footer from "./Footer";
 import Results from "./Results"; 
 import axios from 'axios';
-import { Container, Form } from "react-bootstrap";
+import { Container, Form} from "react-bootstrap";
+
 
 const Calculator = () => {
   const [formData, setFormData] = useState({
@@ -55,18 +54,15 @@ const Calculator = () => {
 
   return (
     <>
-      {/* Header Section */}
-      <Header />
-
       {/* Main Content Section */}
-      <Container className="my-4">
+      <Container className="container2">
         <h2 className="form-title">Carbon Footprint Calculator</h2>
 
         {/* Form Section */}
         <Form onSubmit={handleSubmit}>
           {/* Transportation Section */}
           <div className="mb-4">
-            <h3 className="category-title">Transportation</h3>
+            <h4 className="category-title">Transportation</h4>
             <Form.Group className="mb-3">
               <Form.Label>Type of Transportation</Form.Label>
               <Form.Select
@@ -120,7 +116,7 @@ const Calculator = () => {
 
           {/* Housing Section */}
           <div className="mb-4">
-            <h3 className="category-title">Housing</h3>
+            <h4 className="category-title">Housing</h4>
             <Form.Group className="mb-3">
               <Form.Label>Electricity Consumption (kWh/month)</Form.Label>
               <Form.Control
@@ -161,7 +157,7 @@ const Calculator = () => {
 
           {/* Food Section */}
           <div className="mb-4">
-            <h3 className="category-title">Food</h3>
+            <h4 className="category-title">Food</h4>
             <Form.Group className="mb-3">
               <Form.Label>Type of Diet</Form.Label>
               <Form.Select
@@ -199,7 +195,7 @@ const Calculator = () => {
 
           {/* Waste Section */}
           <div className="mb-4">
-            <h3 className="category-title">Consumption and Waste</h3>
+            <h4 className="category-title">Consumption and Waste</h4>
             <Form.Group className="mb-3">
               <Form.Label>Waste Generated (kg/week)</Form.Label>
               <Form.Control
@@ -241,9 +237,6 @@ const Calculator = () => {
 
       {/* Results Section */}
       {results && <Results results={results} />}
-
-      {/* Footer Section */}
-      <Footer />
     </>
   );
 };
