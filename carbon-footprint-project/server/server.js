@@ -15,7 +15,7 @@ app.set('view engine', 'ejs');
 app.use(express.static('public'));
 
 app.use(cors({
-  origin: 'http://localhost:3000', // Adjust if necessary
+  origin: 'https://carbon-footprint-project-final.onrender.com', // Adjust if necessary
 }));
 
 //Database on Mongoose initialization and configuration
